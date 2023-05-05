@@ -1,18 +1,17 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import Navbar from "./components/Navbar/Navbar";
-import AllRoutes from "./AllRoutes";
+import Navbar from './components/Navbar/Navbar';
+// import { BrowserRouter as Router } from "react-router-dom";
+// import { useEffect, useState } from "react";
+// import { useDispatch } from "react-redux";
+// import Navbar from "./components/Navbar/Navbar";
+// import AllRoutes from "./AllRoutes";
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Navbar handleSlideIn={handleSlideIn} />
-        <AllRoutes slideIn={slideIn} handleSlideIn={handleSlideIn} />
-      </Router>
+
+      <Navbar />
     </div>
   );
 }

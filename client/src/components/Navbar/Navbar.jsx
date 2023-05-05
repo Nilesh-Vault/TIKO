@@ -1,94 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import decode from "jwt-decode";
-import SearchButton  from "@material-ui/icons/Search";
-import logo from "../../assets/logo.png";
-import search from "../../assets/search-solid.svg";
-import Avatar from "../../components/Avatar/Avatar";
-import "./Navbar.css";
-import { setCurrentUser } from "../../actions/currentUser";
-import bars from "../../assets/bars-solid.svg";
-import { fetchTagQuestions } from "../../actions/question";
+// import React from 'react';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faSearch, faUser, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-const Navbar = ({ handleSlideIn }) => {
-  const dispatch = useDispatch();
-  var User = useSelector((state) => state.currentUserReducer);
-  const navigate = useNavigate();
-  const [searchInput,getSearchInput]=useState("");
+// const Navbar = () => {
+//   return (
+//     <nav className="navbar">
+//       <div className="navbar__logo">
+//         <img src="/logo.png" alt="Train Ticket Reservation" />
+//       </div>
+//       <form className="navbar__search-form">
+//         <input type="text" placeholder="Search for trains" className="navbar__search-input" />
+//         <button type="submit" className="navbar__search-button">
+//           <FontAwesomeIcon icon={faSearch} className="navbar__search-icon" />
+//         </button>
+//       </form>
+//       <ul className="navbar__menu">
+//         <li className="navbar__menu-item">
+//           <a href="#">Book Train Tickets</a>
+//         </li>
+//         <li className="navbar__menu-item">
+//           <a href="#">Cancel Train Tickets</a>
+//         </li>
+//         <li className="navbar__menu-item">
+//           <a href="#">PNR Status</a>
+//         </li>
+//         <li className="navbar__menu-item">
+//           <a href="#">Train Timetable</a>
+//         </li>
+//       </ul>
+//       <div className="navbar__actions">
+//         <a href="#" className="navbar__user-link">
+//           <FontAwesomeIcon icon={faUser} className="navbar__user-icon" />
+//           <span className="navbar__user-name">My Account</span>
+//         </a>
+//         <a href="#" className="navbar__cart-link">
+//           <FontAwesomeIcon icon={faShoppingCart} className="navbar__cart-icon" />
+//           <span className="navbar__cart-count">0</span>
+//         </a>
+//       </div>
+//     </nav>
+//   );
+// };
 
-  const handleInputChange = (event) => {
-    const inputValue = event.target.value;
-    getSearchInput(inputValue);
-  }
+// export default Navbar;
 
-  const searchByTag = (tags) =>{
-    // console.log(tags+'a');
-    if(tags != "undefined")
-      dispatch(fetchTagQuestions(tags));
-  };
-
-  const handleLogout = () => {
-    dispatch({ type: "LOGOUT" });
-    navigate("/");
-    dispatch(setCurrentUser(null));
-  };
-
-  useEffect(() => {
-    const token = User?.token;
-    if (token) {
-      const decodedToken = decode(token);
-      if (decodedToken.exp * 1000 < new Date().getTime()) {
-        handleLogout();
-      }
-    }
-    dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
-  }, [User?.token, dispatch]);
-
-  return (
-    <nav className="main-nav">
-      <div className="navbar">
-        <div className="navbar-1">
-          <Link to="/" className="nav-item nav-logo">
-            <img src={logo} alt="logo" width="150px"/>
-          </Link>
-        </div>
-        <div className="search-box">
-          <input type="text" id="search-bar" onChange={handleInputChange}/>
-          <button type="button" onClick={() => searchByTag(searchInput)}>
-            <SearchButton/>
-          </button>
-        </div>
-        <div className="navbar-2">
-          {User === null ? (
-            <Link to="/Auth" className="nav-item nav-links">
-              Log in
-            </Link>
-          ) : (
-            <>
-              <Avatar
-                backgroundColor="#009dff"
-                px="10px"
-                py="7px"
-                borderRadius="50%"
-                color="white"
-              >
-                <Link
-                  to={`/Users/${User?.result?._id}`}
-                  style={{ color: "white", textDecoration: "none" }}
-                >
-                  {User.result.name.charAt(0).toUpperCase()}
-                </Link>
-              </Avatar>
-              <button className="nav-item nav-links" onClick={handleLogout}>
-                Log out
-              </button>
-            </>
-          )}
-        </div>
-      </div>
-    </nav>
-  );
-};
-
-export default Navbar;
+export default function Navbar() {
+  return <div className="nav">hi</div>
+}
